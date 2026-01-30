@@ -14,8 +14,23 @@ public class RobotHazardAuditor {
             throw new RobotSafetyException(
                     "Error: Worker density must be 1-20");
 
-        double machineRiskFactor = 3.0;
+        double factor;
+        switch (machineryState) {
+            case "Worn":
+                factor = 1.3;
+                break;
+            case "Faulty":
+                factor = 2.0;
+                break;
+            case "Critical":
+                factor = 3.0;
+                break;
+            default:
+                throw new RobotSafetyException(
+                        "Error: Unsupported machinery state");
+        }
+
         return ((1.0 - armPrecision) * 15.0)
-                + (workerDensity * machineRiskFactor);
+                + (workerDensity * factor);
     }
 }
