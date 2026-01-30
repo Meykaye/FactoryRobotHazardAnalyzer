@@ -10,11 +10,15 @@ public class FactoryRobotHazardAnalyzer {
 
         System.out.println("Enter Worker Density (1 - 20):");
         int workerDensity = sc.nextInt();
-        sc.nextLine(); // consume newline
+        sc.nextLine();
 
         System.out.println("Enter Machinery State (Worn/Faulty/Critical):");
         String machineryState = sc.nextLine();
 
-        System.out.println("Factory Robot Hazard Analyzer");
+        double machineRiskFactor = 3.0; // assumed
+        double risk = ((1.0 - armPrecision) * 15.0)
+                + (workerDensity * machineRiskFactor);
+
+        System.out.println("Robot Hazard Risk Score: " + risk);
     }
 }
