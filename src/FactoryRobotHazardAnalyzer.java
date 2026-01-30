@@ -16,9 +16,13 @@ public class FactoryRobotHazardAnalyzer {
         String machineryState = sc.nextLine();
 
         RobotHazardAuditor auditor = new RobotHazardAuditor();
-        double risk = auditor.CalculateHazardRisk(
-                armPrecision, workerDensity, machineryState);
 
-        System.out.println("Robot Hazard Risk Score: " + risk);
+        try {
+            double risk = auditor.CalculateHazardRisk(
+                    armPrecision, workerDensity, machineryState);
+            System.out.println("Robot Hazard Risk Score: " + risk);
+        } catch (RobotSafetyException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
